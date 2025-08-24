@@ -1,4 +1,4 @@
-# 🔐 Passwords API
+# 🔐 Passwords API v2
 
 API RESTful segura para gerenciamento de senhas, construída com **Node.js**, **Express**, **TypeScript** e **MongoDB**, com proteção via **API Key**.
 
