@@ -73,18 +73,18 @@ router.put("/:id", async (req, res) => {
             updateDoc.username = username;
         if (password)
             updateDoc.password = password;
-        if (url)
+        if (url !== undefined)
             updateDoc.url = url;
-        if (notes)
+        if (notes !== undefined)
             updateDoc.notes = notes;
         if (createdAt)
             updateDoc.createdAt = createdAt;
         updateDoc.updatedAt = updatedAt || new Date();
-        if (Object.keys(updateDoc).length === 0) {
+        if (Object.keys(updateDoc).length === 1) {
             return res.status(400).json({ error: "Nenhum dado para atualizar" });
         }
         const result = await getCollection().findOneAndUpdate({ _id: new mongodb_1.ObjectId(id) }, { $set: updateDoc }, { returnDocument: "after" });
-        if (!result?.value) {
+        if (!result) {
             return res.status(404).json({ error: "Senha não encontrada" });
         }
         res.status(200).json(result.value);

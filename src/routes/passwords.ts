@@ -81,12 +81,12 @@ router.put("/:id", async (req: Request, res: Response) => {
     if (title) updateDoc.title = title;
     if (username) updateDoc.username = username;
     if (password) updateDoc.password = password;
-    if (url) updateDoc.url = url;
-    if (notes) updateDoc.notes = notes;
+    if (url !== undefined) updateDoc.url = url;
+    if (notes !== undefined) updateDoc.notes = notes;
     if (createdAt) updateDoc.createdAt = createdAt;
     updateDoc.updatedAt = updatedAt || new Date();    
 
-    if (Object.keys(updateDoc).length === 0) {
+    if (Object.keys(updateDoc).length === 1) {
       return res.status(400).json({ error: "Nenhum dado para atualizar" });
     }
 
@@ -96,7 +96,7 @@ router.put("/:id", async (req: Request, res: Response) => {
       { returnDocument: "after" }
     );
 
-    if (!result?.value) {
+    if (!result) {
       return res.status(404).json({ error: "Senha não encontrada" });
     }
 
