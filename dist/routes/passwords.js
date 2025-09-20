@@ -87,7 +87,7 @@ router.put("/:id", async (req, res) => {
         if (!result) {
             return res.status(404).json({ error: "Senha não encontrada" });
         }
-        res.status(200).json(result.value);
+        res.status(200).json(result);
     }
     catch (error) {
         res.status(500).json({ error: "Erro ao atualizar senha" });
